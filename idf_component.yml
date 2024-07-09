@@ -1,0 +1,9 @@
+name: iot_wifi
+version: "0.0.0"
+targets:
+  - esp32
+dependencies:
+  iot_crypto:
+    git: https://github.com/lukks/iot-crypto.git
+  iot_nvs:
+    git: https://github.com/lukks/iot-nvs.git
