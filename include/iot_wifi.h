@@ -11,8 +11,12 @@ extern "C" {
 
 #define WIFI_MAX_SCAN 20
 
-extern wifi_ap_record_t ap_records[WIFI_MAX_SCAN];
-extern uint16_t ap_num;
+typedef struct wifi_scan_result wifi_scan_result_t;
+
+struct wifi_scan_result {
+  uint16_t ap_num;
+  wifi_ap_record_t ap_records[WIFI_MAX_SCAN];
+};
 
 void
 wifi_init ();
@@ -36,13 +40,7 @@ void
 wifi_automatic ();
 
 void
-wifi_ready ();
-
-void
-wifi_scan ();
-
-void
-wifi_print_scan ();
+wifi_scan (wifi_scan_result_t *result);
 
 #ifdef __cplusplus
 }
