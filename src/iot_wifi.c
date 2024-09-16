@@ -24,6 +24,7 @@
 
 #include "../include/iot_wifi.h"
 #include "internal.h"
+#include "wifi_html.h"
 
 static const char *TAG = "WIFI";
 
@@ -34,9 +35,6 @@ static esp_netif_t *netif_ap = NULL;
 static esp_netif_t *netif_sta = NULL;
 
 static httpd_handle_t server = NULL;
-
-extern const uint8_t wifi_html_start[] asm("_binary_wifi_html_start");
-extern const uint8_t wifi_html_end[] asm("_binary_wifi_html_end");
 
 static esp_event_handler_instance_t instance_any_id = NULL;
 static esp_event_handler_instance_t instance_scan_done = NULL;
@@ -350,11 +348,11 @@ static esp_err_t
 http__root_handler (httpd_req_t *req) {
   char PLACEHOLDER[] = "<option value=\"SSID\">SSID</option>\n";
 
-  size_t html_len = wifi_html_end - wifi_html_start;
+  size_t html_len = wifi_html_len;
   size_t records_size = (strlen(PLACEHOLDER) + sizeof(((wifi_ap_record_t *) 0)->ssid) * 2) * WIFI_MAX_SCAN;
 
   char form[html_len + records_size + 1];
-  memcpy(form, wifi_html_start, html_len);
+  memcpy(form, wifi_html, html_len);
   form[html_len] = '\0';
 
   char access_points[records_size];

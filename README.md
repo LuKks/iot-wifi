@@ -19,6 +19,12 @@ void loop () {}
 
 See [`include/iot_wifi.h`](include/iot_wifi.h) for the public API.
 
+## Notes
+
+For updating the UI header:
+
+`xxd -i wifi.html > wifi_html.h`
+
 ## License
 
 MIT
